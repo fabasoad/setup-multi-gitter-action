@@ -29,7 +29,7 @@ runs:
       working-directory: ${{ steps.info.outputs.MULTI_GITTER_PATH }}
     - name: Fix bug
       if: ${{ steps.info.outputs.MULTI_GITTER_INSTALLED == 'false' && runner.os == 'Windows' }}
-      run: Set-Content -Path "install.sh" -Value (Get-Content -Path "install.sh" | Select-String -Pattern 'adjust_format\n\n' -NotMatch)
+      run: Set-Content -Path "install.sh" -Value (Get-Content -Path "install.sh" | Select-String -Pattern "adjust_format`n`n" -NotMatch)
       shell: pwsh
       working-directory: ${{ steps.info.outputs.MULTI_GITTER_PATH }}
     - name: Install multi-gitter

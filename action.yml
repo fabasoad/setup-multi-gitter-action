@@ -24,6 +24,11 @@ runs:
       shell: sh
     - name: Install multi-gitter
       if: ${{ steps.info.outputs.MULTI_GITTER_INSTALLED == 'false' }}
-      run: curl -s https://raw.githubusercontent.com/lindell/multi-gitter/master/install.sh | sh -s -- -d v${{ inputs.version}}
+      run: |
+        curl https://raw.githubusercontent.com/lindell/multi-gitter/master/install.sh --output install.sh --silent
+        if [[ "${{ runner.os }}" == "Windows" ]]; then
+          echo "Windows!!!"
+        fi
+        sh install.sh -d v${{ inputs.version}}
       shell: sh
       working-directory: ${{ steps.info.outputs.MULTI_GITTER_PATH }}

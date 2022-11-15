@@ -34,6 +34,6 @@ runs:
       working-directory: ${{ steps.info.outputs.MULTI_GITTER_PATH }}
     - name: Install multi-gitter
       if: ${{ steps.info.outputs.MULTI_GITTER_INSTALLED == 'false' }}
-      run: ./install.sh -d v${{ inputs.version}}
+      run: ./install.sh -d v${{ inputs.version}} -b "${{ steps.info.outputs.MULTI_GITTER_PATH }}"
       shell: sh
       working-directory: ${{ steps.info.outputs.MULTI_GITTER_PATH }}

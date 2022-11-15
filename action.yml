@@ -27,7 +27,7 @@ runs:
       run: |
         curl https://raw.githubusercontent.com/lindell/multi-gitter/master/install.sh --output install.sh --silent
         if [[ "${{ runner.os }}" == "Windows" ]]; then
-          sed -i 's/adjust_format\n\n//g' install.sh
+          tr -d 'adjust_format\n\n' < install.sh > install.sh
           cat install.sh
         fi
         sh install.sh -d v${{ inputs.version}}

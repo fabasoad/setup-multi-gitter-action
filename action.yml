@@ -22,18 +22,11 @@ runs:
         mkdir -p $multi_gitter_path
         echo "MULTI_GITTER_PATH=$multi_gitter_path" >> $GITHUB_OUTPUT
       shell: sh
-    - name: Download multi-gitter
-      if: ${{ steps.info.outputs.MULTI_GITTER_INSTALLED == 'false' }}
-      run: curl https://raw.githubusercontent.com/lindell/multi-gitter/master/install.sh --output install.sh --silent
-      shell: sh
-      working-directory: ${{ steps.info.outputs.MULTI_GITTER_PATH }}
-    - name: Fix bug
-      if: ${{ steps.info.outputs.MULTI_GITTER_INSTALLED == 'false' && runner.os == 'Windows' }}
-      run: ((Get-Content -Path install.sh -Raw) -Replace 'FORMAT=.exe','FORMAT=tar.gz') | Set-Content -Path install.sh
-      shell: pwsh
-      working-directory: ${{ steps.info.outputs.MULTI_GITTER_PATH }}
     - name: Install multi-gitter
       if: ${{ steps.info.outputs.MULTI_GITTER_INSTALLED == 'false' }}
-      run: ./install.sh -d v${{ inputs.version}}
+      env:
+        BINDIR: ${{ steps.info.outputs.MULTI_GITTER_PATH }}
+      run: |
+        curl -s https://raw.githubusercontent.com/lindell/multi-gitter/master/install.sh | sh -s -- -d v${{ inputs.version}}
+        echo "${{ steps.info.outputs.MULTI_GITTER_PATH }}" >> $GITHUB_PATH
       shell: sh
-      working-directory: ${{ steps.info.outputs.MULTI_GITTER_PATH }}

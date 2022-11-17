@@ -24,6 +24,9 @@ runs:
       shell: sh
     - name: Install multi-gitter
       if: ${{ steps.info.outputs.MULTI_GITTER_INSTALLED == 'false' }}
-      run: curl -s https://raw.githubusercontent.com/lindell/multi-gitter/v${{ inputs.version }}/install.sh | sh
+      env:
+        BINDIR: ${{ steps.info.outputs.MULTI_GITTER_PATH }}
+      run: |
+        curl -s https://raw.githubusercontent.com/lindell/multi-gitter/master/install.sh | sh -s -- -d v${{ inputs.version}}
+        echo "${{ steps.info.outputs.MULTI_GITTER_PATH }}" >> $GITHUB_PATH
       shell: sh
-      working-directory: ${{ steps.info.outputs.MULTI_GITTER_PATH }}

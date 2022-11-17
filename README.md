@@ -4,7 +4,8 @@
 ![Functional Tests](https://github.com/fabasoad/setup-multi-gitter-action/workflows/Functional%20Tests/badge.svg)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/fabasoad/setup-multi-gitter-action/main.svg)](https://results.pre-commit.ci/latest/github/fabasoad/setup-multi-gitter-action/main)
 
-This action installs [multi-gitter](https://github.com/lindell/multi-gitter) CLI tool.
+This action installs [multi-gitter](https://github.com/lindell/multi-gitter)
+CLI tool.
 
 ## Prerequisites
 

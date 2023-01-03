@@ -16,7 +16,7 @@ The following tools have to be installed for successful work of this GitHub acti
 
 | Name    | Required | Description                                                                                               | Default  | Possible values |
 |---------|----------|-----------------------------------------------------------------------------------------------------------|----------|-----------------|
-| version | No       | Version of `multi-gitter` tool that can be found [here](https://github.com/lindell/multi-gitter/releases) | `0.43.2` | &lt;String&gt;  |
+| version | No       | Version of `multi-gitter` tool that can be found [here](https://github.com/lindell/multi-gitter/releases) | `0.43.3` | &lt;String&gt;  |
 
 ## Example usage
 
@@ -34,8 +34,6 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - uses: fabasoad/setup-multi-gitter-action@main
-        with:
-          version: 0.43.2
       - name: Print version
         run: multi-gitter version
 ```

@@ -1,5 +1,6 @@
 # Setup multi-gitter action
 
+[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://stand-with-ukraine.pp.ua)
 ![Release](https://img.shields.io/github/v/release/fabasoad/setup-multi-gitter-action?include_prereleases)
 ![Functional Tests](https://github.com/fabasoad/setup-multi-gitter-action/workflows/Functional%20Tests/badge.svg)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/fabasoad/setup-multi-gitter-action/main.svg)](https://results.pre-commit.ci/latest/github/fabasoad/setup-multi-gitter-action/main)
@@ -16,7 +17,7 @@ The following tools have to be installed for successful work of this GitHub acti
 
 | Name    | Required | Description                                                                                               | Default  | Possible values |
 |---------|----------|-----------------------------------------------------------------------------------------------------------|----------|-----------------|
-| version | No       | Version of `multi-gitter` tool that can be found [here](https://github.com/lindell/multi-gitter/releases) | `0.43.3` | &lt;String&gt;  |
+| version | No       | Version of `multi-gitter` tool that can be found [here](https://github.com/lindell/multi-gitter/releases) | `0.44.0` | &lt;String&gt;  |
 
 ## Example usage
 

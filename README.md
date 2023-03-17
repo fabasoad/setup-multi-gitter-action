@@ -17,7 +17,7 @@ The following tools have to be installed for successful work of this GitHub acti
 
 | Name    | Required | Description                                                                                               | Default  | Possible values |
 |---------|----------|-----------------------------------------------------------------------------------------------------------|----------|-----------------|
-| version | No       | Version of `multi-gitter` tool that can be found [here](https://github.com/lindell/multi-gitter/releases) | `0.44.0` | &lt;String&gt;  |
+| version | No       | Version of `multi-gitter` tool that can be found [here](https://github.com/lindell/multi-gitter/releases) | `0.44.1` | &lt;String&gt;  |
 
 ## Example usage
 
@@ -43,7 +43,7 @@ jobs:
 
 ```shell
 Run multi-gitter version
-multi-gitter version: 0.43.2
+multi-gitter version: 0.44.1
 Release-Date: 2022-11-10
 Go version: go1.19.2
 Commit: 3436db3c806343d2d83f58e65b35c30c906ef5d8

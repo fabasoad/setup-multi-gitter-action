@@ -1,11 +1,15 @@
 ---
 name: Functional Tests
 
-on:
+on:  # yamllint disable-line rule:truthy
   push:
     branches:
       - 'main'
   pull_request:
+
+defaults:
+  run:
+    shell: sh
 
 jobs:
   setup-multi-gitter:
@@ -15,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         os: ['ubuntu', 'windows', 'macos']
-        version: ['0.44.1', '0.44.0', '0.43.3', '0.43.2', '0.43.1']
+        version: ['0.45.0', '0.44.2', '0.44.1', '0.44.0', '0.43.3']
     runs-on: ${{ matrix.os }}-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,4 +28,3 @@ jobs:
           version: ${{ matrix.version }}
       - name: Print version
         run: multi-gitter version
-        shell: sh

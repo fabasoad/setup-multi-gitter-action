@@ -15,9 +15,11 @@ The following tools have to be installed for successful work of this GitHub acti
 
 ## Inputs
 
+<!-- prettier-ignore-start -->
 | Name    | Required | Description                                                                                               | Default  | Possible values |
 |---------|----------|-----------------------------------------------------------------------------------------------------------|----------|-----------------|
-| version | No       | Version of `multi-gitter` tool that can be found [here](https://github.com/lindell/multi-gitter/releases) | `0.45.0` | &lt;String&gt;  |
+| version | No       | Version of `multi-gitter` tool that can be found [here](https://github.com/lindell/multi-gitter/releases) | `0.47.0` | &lt;String&gt;  |
+<!-- prettier-ignore-end -->
 
 ## Example usage
 
@@ -35,6 +37,8 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - uses: fabasoad/setup-multi-gitter-action@main
+        with:
+          version: "0.44.1"
       - name: Print version
         run: multi-gitter version
 ```

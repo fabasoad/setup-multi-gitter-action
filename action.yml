@@ -1,17 +1,17 @@
 ---
-name: 'Setup multi-gitter'
+name: "Setup multi-gitter"
 author: Yevhen Fabizhevskyi
-description: 'This action installs multi-gitter CLI tool.'
+description: "This action installs multi-gitter CLI tool."
 branding:
   icon: terminal
   color: gray-dark
 inputs:
   version:
-    description: 'multi-gitter version.'
+    description: "multi-gitter version."
     required: false
-    default: '0.46.0'
+    default: "0.47.0"
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - name: Collect info
       id: info

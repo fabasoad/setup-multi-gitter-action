@@ -9,7 +9,7 @@ inputs:
   version:
     description: "multi-gitter version."
     required: false
-    default: "0.47.0"
+    default: "0.47.1"
 runs:
   using: "composite"
   steps:

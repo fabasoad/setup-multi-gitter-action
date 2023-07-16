@@ -2,8 +2,8 @@
 
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://stand-with-ukraine.pp.ua)
 ![Release](https://img.shields.io/github/v/release/fabasoad/setup-multi-gitter-action?include_prereleases)
-![Functional Tests](https://github.com/fabasoad/setup-multi-gitter-action/workflows/Functional%20Tests/badge.svg)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/fabasoad/setup-multi-gitter-action/main.svg)](https://results.pre-commit.ci/latest/github/fabasoad/setup-multi-gitter-action/main)
+![functional-tests](https://github.com/fabasoad/setup-multi-gitter-action/actions/workflows/functional-tests.yml/badge.svg)
+![pre-commit](https://github.com/fabasoad/setup-multi-gitter-action/actions/workflows/pre-commit.yml/badge.svg)
 
 This action installs [multi-gitter](https://github.com/lindell/multi-gitter)
 CLI tool.
@@ -18,7 +18,7 @@ The following tools have to be installed for successful work of this GitHub acti
 <!-- prettier-ignore-start -->
 | Name    | Required | Description                                                                                               | Default  | Possible values |
 |---------|----------|-----------------------------------------------------------------------------------------------------------|----------|-----------------|
-| version | No       | Version of `multi-gitter` tool that can be found [here](https://github.com/lindell/multi-gitter/releases) | `0.47.0` | &lt;String&gt;  |
+| version | No       | Version of `multi-gitter` tool that can be found [here](https://github.com/lindell/multi-gitter/releases) | `0.47.1` | &lt;String&gt;  |
 <!-- prettier-ignore-end -->
 
 ## Example usage

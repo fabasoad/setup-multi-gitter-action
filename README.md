@@ -18,7 +18,7 @@ The following tools have to be installed for successful work of this GitHub acti
 <!-- prettier-ignore-start -->
 | Name    | Required | Description                                                                                               | Default  | Possible values |
 |---------|----------|-----------------------------------------------------------------------------------------------------------|----------|-----------------|
-| version | No       | Version of `multi-gitter` tool that can be found [here](https://github.com/lindell/multi-gitter/releases) | `latest` | &lt;String&gt;  |
+| version | No       | Version of `multi-gitter` tool that can be found [here](https://github.com/lindell/multi-gitter/releases) | `0.49.1` | &lt;String&gt;  |
 <!-- prettier-ignore-end -->
 
 ## Example usage

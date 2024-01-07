@@ -9,7 +9,7 @@ inputs:
   version:
     description: "multi-gitter version."
     required: false
-    default: "0.49.1"
+    default: "latest"
 runs:
   using: "composite"
   steps:
@@ -25,9 +25,13 @@ runs:
     - name: Install multi-gitter
       if: ${{ steps.info.outputs.MULTI_GITTER_INSTALLED == 'false' }}
       env:
-        BINDIR: ${{ steps.info.outputs.MULTI_GITTER_PATH }}
-        MULTI_GITTER_VERSION: ${{ inputs.version}}
+        BINDIR: "${{ steps.info.outputs.MULTI_GITTER_PATH }}"
+        MULTI_GITTER_VERSION: "${{ inputs.version}}"
       run: |
-        curl -s "https://raw.githubusercontent.com/lindell/multi-gitter/master/install.sh" | sh -s -- -d "v${MULTI_GITTER_VERSION}"
-        echo "${{ steps.info.outputs.MULTI_GITTER_PATH }}" >> "$GITHUB_PATH"
+        if [ "${MULTI_GITTER_VERSION}" = "latest" ]; then
+          curl -s https://raw.githubusercontent.com/lindell/multi-gitter/master/install.sh | sh
+        else
+          curl -s https://raw.githubusercontent.com/lindell/multi-gitter/master/install.sh | sh -s -- -d "v${MULTI_GITTER_VERSION}"
+        fi
+        echo "${{ steps.info.outputs.MULTI_GITTER_PATH }}" >> $GITHUB_PATH
       shell: sh

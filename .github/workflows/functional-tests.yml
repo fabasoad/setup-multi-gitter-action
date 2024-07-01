@@ -2,12 +2,13 @@
 name: Functional Tests
 
 on: # yamllint disable-line rule:truthy
+  pull_request:
+    paths:
+      - .github/workflows/functional-tests.yml
+      - action.yml
   push:
     branches:
-      - "main"
-  pull_request:
-    branches:
-      - "main"
+      - main
   schedule:
     - cron: "0 0 * * 1"
 
@@ -23,7 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         os: ["ubuntu", "windows", "macos"]
-        version: ["0.49.1", "latest"]
+        version: ["0.52.0", "latest"]
     runs-on: ${{ matrix.os }}-latest
     steps:
       - name: Checkout ${{ github.repository }}

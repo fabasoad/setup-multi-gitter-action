@@ -23,7 +23,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["ubuntu", "windows", "macos"]
+        # TODO: Add Windows once the following issue is resolved:
+        # https://github.com/lindell/multi-gitter/issues/489
+        os: ["ubuntu", "macos"]
         version: ["0.52.0", "latest"]
     runs-on: ${{ matrix.os }}-latest
     steps:
@@ -32,6 +34,6 @@ jobs:
       - name: Setup multi-gitter
         uses: ./
         with:
-          version: ${{ matrix.version }}
+          version: "${{ matrix.version }}"
       - name: Print version
         run: multi-gitter version

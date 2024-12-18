@@ -12,6 +12,7 @@ on: # yamllint disable-line rule:truthy
   schedule:
     # Every Friday at 09:00 JST
     - cron: "0 0 * * 5"
+  workflow_dispatch: {}
 
 defaults:
   run:

@@ -30,7 +30,7 @@ jobs:
         id: prepare-list
         run: |
           url="https://api.github.com/repos/lindell/multi-gitter/releases"
-          versions=$(curl -s "${url}" | jq -c '[.[0:3][].tag_name] | . += ["latest"]')
+          versions=$(curl -s "${url}" | jq -c '[.[0:3][].tag_name] | map(sub("^v"; "")) | . += ["latest"]')
           echo "versions=${versions}" >> "$GITHUB_OUTPUT"
   setup-multi-gitter:
     name: Setup multi-gitter

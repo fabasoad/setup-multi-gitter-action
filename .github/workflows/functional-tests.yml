@@ -46,8 +46,56 @@ jobs:
       - name: Checkout ${{ github.repository }}
         uses: actions/checkout@v4
       - name: Setup multi-gitter
+        id: setup-multi-gitter
         uses: ./
         with:
           version: "${{ matrix.version }}"
+      - name: Test action completion
+        run: |
+          test_equal() {
+            if [ "${2}" != "${3}" ]; then
+              echo "::error title=${1}::Expected: ${3}. Actual: ${2}."
+              exit 1
+            fi
+          }
+          test_equal "Wrong completion status" \
+            "${{ steps.setup-multi-gitter.outcome }}" \
+            "success"
+          test_equal "multi-gitter should not be installed" \
+            "${{ steps.setup-multi-gitter.outputs.installed }}" \
+            "true"
       - name: Print version
         run: multi-gitter version
+  test-force:
+    name: Test force
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        force: ["true", "false"]
+    steps:
+      - name: Checkout ${{ github.repository }}
+        uses: actions/checkout@v4
+      - name: Setup multi-gitter 1
+        id: setup-multi-gitter-1
+        uses: ./
+      - name: Setup multi-gitter 2
+        id: setup-multi-gitter-2
+        uses: ./
+        with:
+          force: ${{ matrix.force }}
+      - name: Test action completion
+        run: |
+          test_equal() {
+            if [ "${2}" != "${3}" ]; then
+              echo "::error title=${1}::Expected: ${3}. Actual: ${2}."
+              exit 1
+            fi
+          }
+          test_equal "Wrong \"installed\" output from setup-multi-gitter-1" \
+            "${{ steps.setup-multi-gitter-1.outputs.installed }}" \
+            "true"
+          test_equal "Wrong \"installed\" output from setup-multi-gitter-2" \
+            "${{ steps.setup-multi-gitter-2.outputs.installed }}" \
+            "${{ matrix.force }}"

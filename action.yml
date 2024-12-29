@@ -7,31 +7,50 @@ branding:
   color: gray-dark
 inputs:
   version:
-    description: "multi-gitter version."
+    description: multi-gitter version. Defaults to the latest version.
     required: false
     default: "latest"
+  force:
+    description: |
+      If "false" skips installation if multi-gitter is already installed. If
+      "true" installs multi-gitter in any case. Defaults to "false".
+    required: false
+    default: "false"
+outputs:
+  installed:
+    description: Whether multi-gitter was installed or not.
+    value: "${{ steps.install-multi-gitter.outcome == 'success' }}"
 runs:
   using: "composite"
   steps:
     - name: Collect info
       id: info
+      env:
+        INPUT_FORCE: "${{ inputs.force }}"
       run: |
-        already_installed=$(if command -v multi-gitter >/dev/null 2>&1; then echo true; else echo false; fi)
-        echo "already-installed=${already_installed}" >> "$GITHUB_OUTPUT"
-        multi_gitter_path="${GITHUB_WORKSPACE}/multi-gitter"
-        mkdir -p "${multi_gitter_path}"
-        echo "target-path=${multi_gitter_path}" >> "$GITHUB_OUTPUT"
+        if [ "${INPUT_FORCE}" = "false" ] && command -v multi-gitter >/dev/null 2>&1; then
+          bin_installed="true"
+        else
+          bin_installed="false"
+        fi
+        echo "bin-installed=${bin_installed}" >> "$GITHUB_OUTPUT"
+        bin_dir="multi-gitter_$(date +%s)"
+        bin_path="${GITHUB_WORKSPACE}/${bin_dir}"
+        mkdir -p "${bin_path}"
+        echo "bin-path=${bin_path}" >> "$GITHUB_OUTPUT"
       shell: sh
     - name: Install multi-gitter
-      if: ${{ steps.info.outputs.already-installed == 'false' }}
+      if: ${{ steps.info.outputs.bin-installed == 'false' }}
+      id: install-multi-gitter
       env:
-        BINDIR: "${{ steps.info.outputs.target-path }}"
+        BINDIR: "${{ steps.info.outputs.bin-path }}"
         INPUT_VERSION: "${{ inputs.version}}"
       run: |
+        install_url="https://raw.githubusercontent.com/lindell/multi-gitter/master/install.sh"
         if [ "${INPUT_VERSION}" = "latest" ]; then
-          curl -s https://raw.githubusercontent.com/lindell/multi-gitter/master/install.sh | sh
+          curl -s "${install_url}" | sh
         else
-          curl -s https://raw.githubusercontent.com/lindell/multi-gitter/master/install.sh | sh -s -- -d "v${INPUT_VERSION}"
+          curl -s "${install_url}" | sh -s -- -d "v${INPUT_VERSION}"
         fi
         echo "${BINDIR}" >> "$GITHUB_PATH"
       shell: sh

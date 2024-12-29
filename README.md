@@ -16,10 +16,22 @@ The following tools have to be installed for successful work of this GitHub acti
 
 ## Inputs
 
+```yaml
+- uses: fabasoad/setup-multi-gitter-action@v0
+  with:
+    # (Optional) multi-gitter version. Defaults to the latest version.
+    version: "0.54.1"
+    # (Optional) If "false" skips installation if multi-gitter is already installed.
+    # If "true" installs multi-gitter in any case. Defaults to "false".
+    force: "false"
+```
+
+## Outputs
+
 <!-- prettier-ignore-start -->
-| Name    | Required | Description                                                                                               | Default  | Possible values |
-|---------|----------|-----------------------------------------------------------------------------------------------------------|----------|-----------------|
-| version | No       | Version of `multi-gitter` tool that can be found [here](https://github.com/lindell/multi-gitter/releases) | `latest` | &lt;String&gt;  |
+| Name      | Description                               | Example |
+|-----------|-------------------------------------------|---------|
+| installed | Whether multi-gitter was installed or not | `true`  |
 <!-- prettier-ignore-end -->
 
 ## Example usage
@@ -36,8 +48,8 @@ jobs:
     name: multi-gitter
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
-      - uses: fabasoad/setup-multi-gitter-action@main
+      - uses: actions/checkout@v4
+      - uses: fabasoad/setup-multi-gitter-action@v0
         with:
           # (Optional) Specific version of multi-gitter CLI. Defaults to "latest".
           version: "0.44.1"

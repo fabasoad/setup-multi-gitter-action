@@ -25,6 +25,8 @@ runs:
   steps:
     - name: Collect info
       id: info
+      env:
+        INPUT_FORCE: "${{ inputs.force }}"
       run: |
         if [ "${INPUT_FORCE}" = "false" ] && command -v multi-gitter >/dev/null 2>&1; then
           bin_installed="true"

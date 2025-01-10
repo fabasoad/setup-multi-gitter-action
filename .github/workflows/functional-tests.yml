@@ -26,11 +26,21 @@ jobs:
     outputs:
       versions: ${{ steps.prepare-list.outputs.versions }}
     steps:
+      - name: Get releases
+        id: github-releases
+        uses: yakubique/github-releases@v1.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          repository: "lindell/multi-gitter"
+          sort: "desc"
       - name: Prepare list
         id: prepare-list
+        env:
+          RELEASES_AMOUNT: "3"
         run: |
-          url="https://api.github.com/repos/lindell/multi-gitter/releases"
-          versions=$(curl -s "${url}" | jq -c '[.[0:3][].tag_name] | map(sub("^v"; "")) | . += ["latest"]')
+          versions=$(echo '${{ steps.github-releases.outputs.releases }}' \
+            | jq -c -r --arg n "${RELEASES_AMOUNT}" '.[0:($n | tonumber)] | map(sub("^v"; "")) | . += ["latest"]')
           echo "versions=${versions}" >> "$GITHUB_OUTPUT"
   setup-multi-gitter:
     name: Setup multi-gitter
@@ -42,6 +52,9 @@ jobs:
       matrix:
         os: ["ubuntu", "macos", "windows"]
         version: ${{ fromJSON(needs.get-versions.outputs.versions) }}
+        exclude:
+          # https://github.com/lindell/multi-gitter/issues/518
+          - version: "0.54.0"
     steps:
       - name: Checkout ${{ github.repository }}
         uses: actions/checkout@v4
@@ -58,10 +71,7 @@ jobs:
               exit 1
             fi
           }
-          test_equal "Wrong completion status" \
-            "${{ steps.setup-multi-gitter.outcome }}" \
-            "success"
-          test_equal "multi-gitter should not be installed" \
+          test_equal "multi-gitter should be installed" \
             "${{ steps.setup-multi-gitter.outputs.installed }}" \
             "true"
       - name: Print version

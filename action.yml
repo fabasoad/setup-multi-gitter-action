@@ -23,34 +23,34 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Validate inputs
+      env:
+        INPUT_VERSION: "${{ inputs.version }}"
+        INPUT_FORCE: "${{ inputs.force }}"
+      run: ./validate-inputs.sh "${INPUT_VERSION}" "${INPUT_FORCE}"
+      shell: sh
+      working-directory: ${{ github.action_path }}/src
+
     - name: Collect info
       id: info
       env:
         INPUT_FORCE: "${{ inputs.force }}"
-      run: |
-        if [ "${INPUT_FORCE}" = "false" ] && command -v multi-gitter >/dev/null 2>&1; then
-          bin_installed="true"
-        else
-          bin_installed="false"
-        fi
-        echo "bin-installed=${bin_installed}" >> "$GITHUB_OUTPUT"
-        bin_dir="multi-gitter_$(date +%s)"
-        bin_path="${GITHUB_WORKSPACE}/${bin_dir}"
-        mkdir -p "${bin_path}"
-        echo "bin-path=${bin_path}" >> "$GITHUB_OUTPUT"
+      run: ./collect-info.sh "${INPUT_FORCE}"
       shell: sh
+      working-directory: ${{ github.action_path }}/src
+
     - name: Install multi-gitter
       if: ${{ steps.info.outputs.bin-installed == 'false' }}
       id: install-multi-gitter
       env:
+        # Env var needed for the correct multi-gitter installation. Should not
+        # be renamed.
         BINDIR: "${{ steps.info.outputs.bin-path }}"
         INPUT_VERSION: "${{ inputs.version}}"
-      run: |
-        install_url="https://raw.githubusercontent.com/lindell/multi-gitter/master/install.sh"
-        if [ "${INPUT_VERSION}" = "latest" ]; then
-          curl -s "${install_url}" | sh
-        else
-          curl -s "${install_url}" | sh -s -- -d "v${INPUT_VERSION}"
-        fi
-        echo "${BINDIR}" >> "$GITHUB_PATH"
+      run: ./install-multi-gitter.sh "${INPUT_VERSION}" "${BINDIR}"
+      shell: sh
+      working-directory: ${{ github.action_path }}/src
+
+    - name: Print version
+      run: multi-gitter version
       shell: sh

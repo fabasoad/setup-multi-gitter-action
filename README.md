@@ -11,7 +11,7 @@ CLI tool.
 
 ## Prerequisites
 
-The following tools have to be installed for successful work of this GitHub action:
+The following tools have to be installed for successful work of this GitHub Action:
 [curl](https://curl.se).
 
 ## Inputs
@@ -48,11 +48,9 @@ jobs:
     name: multi-gitter
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
       - uses: fabasoad/setup-multi-gitter-action@v0
         with:
-          # (Optional) Specific version of multi-gitter CLI. Defaults to "latest".
-          version: "0.44.1"
+          version: "0.54.1"
       - name: Print version
         run: multi-gitter version
 ```
@@ -61,8 +59,10 @@ jobs:
 
 ```shell
 Run multi-gitter version
-multi-gitter version: 0.44.1
-Release-Date: 2022-11-10
-Go version: go1.19.2
-Commit: 3436db3c806343d2d83f58e65b35c30c906ef5d8
+multi-gitter version: 0.54.1
+Release-Date: 2024-11-21
+Go version: go1.23.2
+OS: linux
+Arch: amd64
+Commit: 5841986bcc7e4db734349878435e4ef33e70aa2c
 ```

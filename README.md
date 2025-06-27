@@ -66,3 +66,7 @@ OS: linux
 Arch: amd64
 Commit: 5841986bcc7e4db734349878435e4ef33e70aa2c
 ```
+
+## Contributions
+
+![Alt](https://repobeats.axiom.co/api/embed/3d4ddff6a3cdc7933774fdccfa182e70b2a2c94b.svg "Repobeats analytics image")

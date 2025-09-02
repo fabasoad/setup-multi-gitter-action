@@ -54,7 +54,7 @@ jobs:
         version: ${{ fromJSON(needs.get-versions.outputs.versions) }}
     steps:
       - name: Checkout ${{ github.repository }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup multi-gitter
         id: setup-multi-gitter
         uses: ./
@@ -83,7 +83,7 @@ jobs:
         force: ["true", "false"]
     steps:
       - name: Checkout ${{ github.repository }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup multi-gitter 1
         id: setup-multi-gitter-1
         uses: ./
